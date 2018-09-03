@@ -10,6 +10,7 @@ export class App extends Component {
     };
   }
 
+
   onInputChange() {
     this.setState(
       {
@@ -19,17 +20,29 @@ export class App extends Component {
     );
   }
 
-  httpGet() {
-    let theUrl = `http://www.omdbapi.com/?t=${
-      this.state.title
-    }&apikey=795e4ddc`;
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", theUrl, false);
-    xmlHttp.send(null);
-    this.setState({
-      response: JSON.parse(xmlHttp.responseText)
-    });
-  }
+  // httpGet() {
+  //   let theUrl = `http://www.omdbapi.com/?t=${
+  //     this.state.title
+  //   }&apikey=795e4ddc`;
+  //   var xmlHttp = new XMLHttpRequest();
+  //   xmlHttp.open("GET", theUrl, false);
+  //   xmlHttp.send(null);
+  //   this.setState({
+  //     response: xmlHttp.responseText.json()
+  //   });
+  // }
+
+// httpGet() {
+//   fetch(`http://www.omdbapi.com/?t=${this.state.title}&apikey=795e4ddc`)
+//   .then(function(response) {
+//     return response.json();
+//   })
+//   .then(myJson => {
+//     this.setState({
+//       response: myJson
+//     })
+//   });
+// }
 
   render() {
     return (
@@ -40,7 +53,7 @@ export class App extends Component {
           onChange={this.onInputChange.bind(this)}
           ref={n => (this.title = n)}
         />
-        <input type="button" value="search" />
+        <input type="button" value="search"/>
         <div>
           {this.state.response && <img src={this.state.response.Poster} />}
         </div>
