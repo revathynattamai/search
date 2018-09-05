@@ -14,6 +14,9 @@ module.exports = {
         host: 'localhost',
         port: 5000,
         hot: true,
+        proxy: {
+          '/search': 'http://localhost:3000',
+        },
       },
       resolve: {
         extensions: ['.js', '.jsx']
