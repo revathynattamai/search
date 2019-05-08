@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.js --hot --inline",
-    "test": "npm run test", 
+    "test": "karma start --auto-watch=true --single-run=false",
     "start": "node server/index.js"
   },
   "keywords": [
@@ -22,12 +22,25 @@
     "webpack-dev-server": "^3.1.7"
   },
   "devDependencies": {
-    "webpack-cli": "^3.1.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
+    "babel-jest": "^24.5.0",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1"
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^2.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "enzyme-to-json": "^3.3.5",
+    "jasmine-core": "^3.3.0",
+    "jest": "^24.5.0",
+    "karma": "^4.0.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^2.0.1",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "style-loader": "^0.23.1",
+    "webpack-cli": "^3.1.0"
   }
 }

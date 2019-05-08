@@ -1,33 +1,31 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import styles from './styles.less';
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: "",
-      result: []
+      title: "",
+      response: []
     };
-    this.searchTermChange = this.searchTermChange.bind(this);
-    this.myRef = React.createRef();
   }
 
-  getSearchResults() {
+  httpGet() {
     fetch("/search")
       .then(response => {
         return response.json();
       })
       .then(myJson => {
-        const newResults = myJson.transactions.filter((res) => {
-         return res.description.toLowerCase().includes(this.state.searchTerm)
-          });
-          this.setState({ result: newResults});  
+        this.setState({
+          title: this.title.value,
+          response: myJson
+        });
       });
   }
 
   getTable() {
-    if (this.state.result) {
+    let result = this.state.response.transactions;
+    if (result) {
       return (
         <table>
           <thead>
@@ -38,7 +36,7 @@ export class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.result.map((res, i) => (
+            {result.map((res, i) => (
               <tr key={i}>
                 <td>{res.description}</td>
                 <td>{res.payment_type}</td>
@@ -51,21 +49,19 @@ export class App extends Component {
     }
   }
 
-  searchTermChange(e) {
-    this.setState({ searchTerm: e.target.value });
-  }
-
   render() {
     return (
       <div>
         <h1>Search</h1>
         <input
           type="text"
-          value={this.state.searchTerm}
-          onChange={this.searchTermChange}
+          onChange={this.httpGet.bind(this)}
+          ref={n => {
+            this.title = n;
+          }}
         />
-        <button onClick={() => this.getSearchResults()}>Search</button>
-        {this.state.result.length > 0 && this.getTable()}
+        <button>Search</button>
+        {this.getTable()}
       </div>
     );
   }
